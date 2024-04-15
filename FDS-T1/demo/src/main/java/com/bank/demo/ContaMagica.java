@@ -1,22 +1,25 @@
 package com.bank.demo;
 
 public class ContaMagica {
+    public static final int SILVER = 0;
+    public static final int GOLD = 1;
+    public static final int PLATINUM = 2;
     private double saldo;
-    private TipoConta tipo;
+    private int status;
 
     public ContaMagica(){
         this.saldo = 0.0;
-        this.tipo = TipoConta.SILVER; 
+        this.status = SILVER; 
     }
 
     public boolean Upgrade(){
-        if(saldo > 50.000 && tipo != TipoConta.GOLD){
-            tipo = TipoConta.GOLD;
+        if(getSaldo() > 50.000 && getStatus() != GOLD){
+            status = GOLD;
             System.out.println("Upgrading to Gold");
             return true;
         }
-        else if (saldo > 200.000  && tipo != TipoConta.PLATINUM) {
-            tipo = TipoConta.PLATINUM;
+        else if (getSaldo() > 200.000  && getStatus() != PLATINUM) {
+            status = PLATINUM;
             System.out.println("Upgrading to Platinum");
             return true;
         }
@@ -24,13 +27,13 @@ public class ContaMagica {
     }
 
     public boolean Downgrade(){
-        if (saldo < 25.000 && tipo == TipoConta.GOLD) {
-            tipo = TipoConta.SILVER;
+        if (getSaldo() < 25.000 && getStatus() == GOLD) {
+            status = SILVER;
             System.out.println("Downgrading to Silver");
             return true;
         }
-        else if (saldo < 100.000 && tipo == TipoConta.PLATINUM) {
-            tipo = TipoConta.GOLD;
+        else if (getSaldo() < 100.000 && getStatus() == PLATINUM) {
+            status = GOLD;
             System.out.println("Downgrading to Gold");
             return true;
         }
@@ -48,7 +51,7 @@ public class ContaMagica {
     }
 
     public double Saque(double valor){
-        if(valor > saldo || valor < 0){
+        if(valor > getSaldo() || valor < 0){
             System.out.println();
             throw new IllegalArgumentException("Valor Inválido");
         }
@@ -57,5 +60,13 @@ public class ContaMagica {
             Downgrade();
             return valor;
         }
+    }
+
+    public int getStatus(){
+        return status;
+    }
+
+    public double getSaldo(){
+        return saldo;
     }
 }
