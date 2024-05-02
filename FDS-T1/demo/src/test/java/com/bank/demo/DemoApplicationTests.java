@@ -73,8 +73,9 @@ class DemoApplicationTests {
     }
 
     @Test
-    public void testDowngradeParaGold() {
-        conta.Deposito(200000.0);
+    public void testDowngradeParaGold(){
+        conta.Deposito(50000.0);
+        conta.Deposito(150000.0);
         conta.Saque(150000.0);
         assertEquals(ContaMagica.GOLD, conta.getStatus());
     }
