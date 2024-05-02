@@ -62,7 +62,7 @@ class DemoApplicationTests {
     conta.Deposito(50000.0);
     conta.Deposito(200000.0);
     assertEquals(ContaMagica.PLATINUM, conta.getStatus());
-}
+	}
 
 
     @Test
@@ -89,4 +89,53 @@ class DemoApplicationTests {
         conta.Deposito(1000.0);
         assertEquals(1000.0, conta.getSaldo(), 0.001);
     }
+
+	@Test
+	public void testDepositoEmContaSilver() {
+		conta.Deposito(1000.0);
+		assertEquals(1000.0, conta.getSaldo(), 0.001);
+	}
+
+	@Test
+	public void testRetiradaComDowngradePlatinumParaGold() {
+		conta.Deposito(200000.0); 
+		conta.Saque(100000.0); 
+		assertEquals(ContaMagica.GOLD, conta.getStatus());
+	}
+
+	@Test
+	public void testRetiradaComDowngradeGoldParaSilver() {
+		conta.Deposito(50000.0);
+		conta.Saque(30000.0); 
+		assertEquals(ContaMagica.SILVER, conta.getStatus());
+	}
+
+	@Test
+	public void testNaoUpgradeDiretoDeSilverParaPlatinum() {
+		conta.Deposito(100000.0);
+		assertEquals(ContaMagica.GOLD, conta.getStatus());
+	}
+	
+
+	@Test
+	public void testNaoDowngradeDuplo() {
+		conta.Deposito(200000.0);
+		conta.Saque(150000.0); 
+		assertEquals(ContaMagica.GOLD, conta.getStatus());
+	}
+
+	@Test
+	public void testValorLimiteInferiorSilver() {
+		conta.Deposito(50000.0);
+		conta.Saque(25000.1);  
+		assertEquals(ContaMagica.SILVER, conta.getStatus());
+	}
+
+	@Test
+	public void testValorLimiteSuperiorGold() {
+		conta.Deposito(50000.0); 
+		conta.Deposito(150000.0); 
+		conta.Saque(150000.0); 
+		assertEquals(ContaMagica.GOLD, conta.getStatus());
+	}
 }
