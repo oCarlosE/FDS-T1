@@ -12,13 +12,12 @@ public class ContaMagica {
         this.status = SILVER; 
     }
 
-    public boolean Upgrade(){
-        if(getSaldo() > 50.000 && getStatus() != GOLD){
+    public boolean Upgrade() {
+        if (getSaldo() >= 50000 && getStatus() != GOLD) {
             status = GOLD;
             System.out.println("Upgrading to Gold");
             return true;
-        }
-        else if (getSaldo() > 200.000  && getStatus() != PLATINUM) {
+        } else if (getSaldo() >= 200000 && getStatus() != PLATINUM) { 
             status = PLATINUM;
             System.out.println("Upgrading to Platinum");
             return true;
@@ -26,20 +25,19 @@ public class ContaMagica {
         return false;
     }
 
-    public boolean Downgrade(){
-        if (getSaldo() < 25.000 && getStatus() == GOLD) {
+    public boolean Downgrade() {
+        if (getSaldo() < 25000 && getStatus() == GOLD) {
             status = SILVER;
             System.out.println("Downgrading to Silver");
             return true;
-        }
-        else if (getSaldo() < 100.000 && getStatus() == PLATINUM) {
+        } else if (getSaldo() < 100000 && getStatus() == PLATINUM) {
             status = GOLD;
             System.out.println("Downgrading to Gold");
             return true;
         }
         return false;
     }
-
+    
     public void Deposito(double valor){
         if (valor < 0) {
             throw new IllegalArgumentException("Valor negativo é inválido para depósito");
