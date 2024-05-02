@@ -125,14 +125,14 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	public void testValorLimiteInferiorSilver() {
+	public void testLimiteInferiorParaDowngradeSilver() {
 		conta.Deposito(50000.0);
 		conta.Saque(25000.1);  
 		assertEquals(ContaMagica.SILVER, conta.getStatus());
 	}
 
 	@Test
-	public void testValorLimiteSuperiorGold() {
+	public void testLimiteSuperiorParaDowngradeGold() {
 		conta.Deposito(50000.0); 
 		conta.Deposito(150000.0); 
 		conta.Saque(150000.0); 
