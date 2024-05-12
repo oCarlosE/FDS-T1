@@ -43,7 +43,17 @@ public class ContaMagica {
             throw new IllegalArgumentException("Valor negativo é inválido para depósito");
         }
         else{
-            saldo += valor;
+            switch (status) {
+                case ContaMagica.SILVER:
+                    saldo += valor;
+                break;
+                case ContaMagica.GOLD:
+                    saldo += valor + valor*0.01;
+                break;
+                case ContaMagica.PLATINUM:
+                    saldo += valor + valor*0.025;
+                break;
+            }
             Upgrade();
         }
     }
